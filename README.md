@@ -1,66 +1,399 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🛒 Laravel Product CRUD API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sebuah aplikasi Laravel sederhana untuk manajemen produk menggunakan prinsip Clean Architecture, SOLID Principles, Repository Pattern, dan dokumentasi API.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🔧 Tech Stack
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Laravel 11
+- PHP 8.2+
+- MySQL
+- Postman (untuk testing API)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 📂 Struktur Folder
+```sql
+app/
+├── Exceptions/
+│   └──  Handler.php
+├── Http/
+│   ├── Controllers/
+│   │   └── ProductController.php
+│   ├── Requests/
+│   │   └── ProductRequest.php
+│   ├── Interfaces/
+│   │   └── ProductRepositoryInterface.php
+│   ├── Repositories/
+│   │   └── ProductRepository.php
+├── Models/
+│   └── Product.php
+├── Providers/
+│   └──  AppServiceProvider.php
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+database/
+└── migrations/
+    └── 2025_04_06_060328_create_products_table.php
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+routes/
+└── api.php
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Instalasi
+```bash
+git clone https://github.com/Vinsmoke-Tech/product-management.git
+```
+```bash
+cd product-management
+```
+```bash
+code .
+```
+```bash
+composer install
+```
+```bash
+rename .env.example jadi .env
+```
+## 🔧 Konfigurasi .env
+```php
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=product_crud
+DB_USERNAME={Username anda}
+DB_PASSWORD={Password anda}
+```
 
-## Laravel Sponsors
+## 💻Jalankan Server
+```bash
+php artisan migrate
+php artisan serve
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 📄 Model: Product.php
+```php
+<?php
 
-### Premium Partners
+namespace App\Models;
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-## Contributing
+class Product extends Model
+{
+    use SoftDeletes;
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    protected $fillable = [
+        'product_name',
+        'description',
+        'product_price',
+        'stock',
+    ];
+}
+```
 
-## Code of Conduct
+## 🧬 Migration: create_products_table.php
+```php
+<?php
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-## Security Vulnerabilities
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->string('product_name')->unique();
+            $table->text('description')->nullable();
+            $table->decimal('product_price', 8, 2)->default(0);
+            $table->integer('stock')->default(0);
+            $table->timestampsTz();
+            $table->softDeletesTz();
+        });
+    }
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('products');
+    }
+};
+```
 
-## License
+## 🔐 Request Validation: ProductRequest.php
+```php
+<?php
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class ProductRequest extends FormRequest
+{
+    public function authorize(): bool {
+        return true;
+    }
+
+    public function rules(): array {    
+        $id = $this->route('product')?->id ?? null;
+        
+        return [
+            'product_name' => 'required|string|max:255|unique:products,product_name,' . $id,
+            'description' => 'nullable|string',
+            'product_price' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+        ];
+    }
+
+
+    public function messages(): array
+    {
+        return [
+            'product_name.required' => 'Nama produk wajib diisi.',
+            'product_name.string' => 'Nama produk harus berupa teks.',
+            'product_name.max' => 'Nama produk maksimal 255 karakter.',
+            'product_name.unique' => 'Nama produk sudah digunakan, silakan pilih nama lain.',
+
+            'description.string' => 'Deskripsi harus berupa teks.',
+
+            'product_price.required' => 'Harga produk wajib diisi.',
+            'product_price.numeric' => 'Harga harus berupa angka.',
+            'product_price.min' => 'Harga tidak boleh kurang dari 0.',
+
+            'stock.required' => 'Stok wajib diisi.',
+            'stock.integer' => 'Stok harus berupa bilangan bulat.',
+            'stock.min' => 'Stok tidak boleh kurang dari 0.',
+        ];
+    }
+
+}
+```
+
+## 🧩 Repository Interface: ProductRepositoryInterface.php
+```php
+<?php
+
+// app/Http/Repositories/ProductRepository.php
+
+// app/Http/Interfaces/ProductRepositoryInterface.php
+
+namespace App\Http\Interfaces;
+
+use Illuminate\Http\Request;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use App\Models\Product;
+
+interface ProductRepositoryInterface
+{
+    public function all(): LengthAwarePaginator;
+    public function create(array $data): Product;
+    public function update(Product $product, array $data): Product;
+    public function delete(Product $product): void;
+}
+```
+
+## 🧠 Repository Implementation: ProductRepository.php
+```php
+<?php
+
+namespace App\Http\Repositories;
+
+use Log;
+use App\Models\Product;
+use App\Http\Interfaces\ProductRepositoryInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
+class ProductRepository implements ProductRepositoryInterface
+{
+    public function all(): LengthAwarePaginator
+    {
+        return Product::paginate(5);
+    }
+
+    public function create(array $data): Product
+    {
+        return Product::create($data);
+    }
+
+    public function update(Product $product, array $data): Product
+    {
+        $product->update($data);
+        return $product;
+    }
+
+    public function delete(Product $product): void
+    {
+        if ($product->stock > 0) {
+            throw new \Exception("Produk tidak bisa dihapus karena stok masih tersedia.");
+        }
+    
+        $product->delete();
+    }
+    
+}
+```
+
+## 🔁 Service Provider Binding (AppServiceProvider.php)
+```php
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use App\Http\Interfaces\ProductRepositoryInterface;
+use App\Http\Repositories\ProductRepository;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        //
+    }
+}
+```
+
+## 🧭 Controller: ProductController.php
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Product;
+use Illuminate\Http\JsonResponse;
+use App\Http\Requests\ProductRequest;
+use App\Http\Interfaces\ProductRepositoryInterface;
+
+class ProductController extends Controller
+{
+    public function __construct(private ProductRepositoryInterface $productRepository) {}
+
+    public function index(): JsonResponse
+    {
+        $products = $this->productRepository->all();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Daftar produk berhasil diambil.',
+            'data' => $products->items(),
+            'pagination' => [
+                'total' => $products->total(),
+                'current_page' => $products->currentPage(),
+                'per_page' => $products->perPage(),
+                'last_page' => $products->lastPage(),
+                'next_page_url' => $products->nextPageUrl(),
+                'previous_page_url' => $products->previousPageUrl(),
+            ]
+        ], 201);
+    }
+
+    public function store(ProductRequest $request): JsonResponse
+    {
+        $product = $this->productRepository->create($request->validated());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Produk berhasil ditambahkan.',
+            'data' => $product
+        ], 201);
+    }
+
+    public function update(ProductRequest $request, Product $product): JsonResponse
+    {
+        $product = $this->productRepository->update($product, $request->validated());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Produk berhasil diperbarui.',
+            'data' => $product
+        ]);
+    }
+
+    public function destroy(Product $product): JsonResponse
+    {
+        try {
+            $this->productRepository->delete($product);
+    
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Produk berhasil dihapus.'
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Gagal menghapus produk.',
+                'error' => $e->getMessage()
+            ], 400);
+        }
+    }
+}
+```
+## 🛣️ Routing: routes/api.php
+```php
+<?php
+
+use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
+
+Route::prefix('products')->controller(ProductController::class)->group(function () {
+    Route::get('/list', 'index');
+    Route::get('{product}', 'show');
+    Route::post('/', 'store');
+    Route::put('{product}', 'update');
+    Route::delete('{product}', 'destroy');
+});
+```
+
+# 📘 Dokumentasi Arsitektur
+
+---
+
+## ✅ Arsitektur:
+-Controller: Hanya menangani permintaan & respon.
+
+-Request: Validasi input.
+
+-Repository: Mengelola logika bisnis & interaksi database.
+
+-Interface: Memastikan dependensi longgar & mudah diubah/diuji.
+
+-Model: Mewakili entitas produk.
+
+-Service Provider: Binding antar interface dan implementasi (IOC Container).
+
+---
+
+## 🔍 Prinsip SOLID:
+-Single Responsibility: Tiap class punya satu tugas.
+
+-Open/Closed: Bisa diperluas via interface tanpa ubah kode utama.
+
+-Liskov Substitution: Interface dapat diganti implementasinya.
+
+-Interface Segregation: Interface hanya menyediakan metode yang dibutuhkan.
+
+-Dependency Inversion: Controller tergantung pada abstraksi, bukan implementasi.
+
