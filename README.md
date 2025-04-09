@@ -527,4 +527,33 @@ http://127.0.0.1:8000/api/products
     }
 }
 ```
+
+## 🔹 PUT /api/products/{product}
+- body -> raw
+'''json
+{
+  "product_name": "es teh anget",
+  "description": "tes",
+  "product_price": 10000,
+  "stock": 20
+}
+'''
+
+-hasil
+'''json
+{
+    "status": "success",
+    "message": "Produk berhasil diperbarui.",
+    "data": {
+        "id": 1,
+        "product_name": "es teh anget",
+        "description": "tes",
+        "product_price": 10000,
+        "stock": 20,
+        "created_at": "2025-04-06T07:25:54.000000Z",
+        "updated_at": "2025-04-09T13:57:23.000000Z",
+        "deleted_at": null
+    }
+}
+'''
  
