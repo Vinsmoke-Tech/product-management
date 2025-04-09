@@ -43,12 +43,13 @@ code .
 composer install
 rename .env.example jadi .env
 
-# Atur DB di .env
-
+## Atur DB di .env
+```bash
 php artisan migrate
 php artisan serve
 
-# 💻 .env
+## 💻 .env
+```php
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -56,7 +57,7 @@ DB_DATABASE=product_crud
 DB_USERNAME={Username anda}
 DB_PASSWORD={Password anda}
 
-# 📄 Model: Product.php
+## 📄 Model: Product.php
 ```php
 <?php
 
