@@ -367,33 +367,33 @@ Route::prefix('products')->controller(ProductController::class)->group(function 
 });
 ```
 
-#📘 Dokumentasi Arsitektur
+# 📘 Dokumentasi Arsitektur
 
 ---
 
-##✅ Arsitektur:
-Controller: Hanya menangani permintaan & respon.
+## ✅ Arsitektur:
+-Controller: Hanya menangani permintaan & respon.
 
-Request: Validasi input.
+-Request: Validasi input.
 
-Repository: Mengelola logika bisnis & interaksi database.
+-Repository: Mengelola logika bisnis & interaksi database.
 
-Interface: Memastikan dependensi longgar & mudah diubah/diuji.
+-Interface: Memastikan dependensi longgar & mudah diubah/diuji.
 
-Model: Mewakili entitas produk.
+-Model: Mewakili entitas produk.
 
-Service Provider: Binding antar interface dan implementasi (IOC Container).
+-Service Provider: Binding antar interface dan implementasi (IOC Container).
 
 ---
 
-##🔍 Prinsip SOLID:
-Single Responsibility: Tiap class punya satu tugas.
+## 🔍 Prinsip SOLID:
+-Single Responsibility: Tiap class punya satu tugas.
 
-Open/Closed: Bisa diperluas via interface tanpa ubah kode utama.
+-Open/Closed: Bisa diperluas via interface tanpa ubah kode utama.
 
-Liskov Substitution: Interface dapat diganti implementasinya.
+-Liskov Substitution: Interface dapat diganti implementasinya.
 
-Interface Segregation: Interface hanya menyediakan metode yang dibutuhkan.
+-Interface Segregation: Interface hanya menyediakan metode yang dibutuhkan.
 
-Dependency Inversion: Controller tergantung pada abstraksi, bukan implementasi.
+-Dependency Inversion: Controller tergantung pada abstraksi, bukan implementasi.
 
