@@ -530,17 +530,16 @@ http://127.0.0.1:8000/api/products
 
 ## 🔹 PUT /api/products/{product}
 - body -> raw
-'''json
+```json
 {
   "product_name": "es teh anget",
   "description": "tes",
   "product_price": 10000,
   "stock": 20
 }
-'''
+```
 
--hasil
-'''json
+```json
 {
     "status": "success",
     "message": "Produk berhasil diperbarui.",
@@ -555,5 +554,5 @@ http://127.0.0.1:8000/api/products
         "deleted_at": null
     }
 }
-'''
+```
  
