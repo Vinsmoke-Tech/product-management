@@ -529,7 +529,7 @@ http://127.0.0.1:8000/api/products
 ```
 
 ## 🔹 PUT /api/products/{product}
-- body -> raw
+- POSTMAN masuk ke menu body -> raw
 ```json
 {
   "product_name": "es teh anget",
@@ -538,7 +538,7 @@ http://127.0.0.1:8000/api/products
   "stock": 20
 }
 ```
-
+- hasil
 ```json
 {
     "status": "success",
@@ -555,4 +555,35 @@ http://127.0.0.1:8000/api/products
     }
 }
 ```
- 
+
+## 🔹 DELETE /api/products/{product}
+```json
+{
+    "status": "success",
+    "message": "Produk berhasil dihapus."
+}
+```
+
+###Validasi
+```json
+{
+    "status": "error",
+    "message": "Gagal menghapus produk.",
+    "error": "Produk tidak bisa dihapus karena stok masih tersedia."
+}
+```
+
+---
+
+# 📄 Catatan
+
+## Pastikan Header Accept: application/json Aktif di Postman
+
+- Di tab Headers, tambahkan:
+```bash
+Key	            Value
+Accept	        application/json //untuk menampilkan pesan error 
+Content-Type    application/json //untuk proses update method PUT
+```
+
+---
