@@ -57,23 +57,24 @@ DB_USERNAME={Username anda}
 DB_PASSWORD={Password anda}
 
 # 📄 Model: Product.php
+```php
 <?php
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use \Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use SoftDeletes;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['product_name', 'description', 'product_price', 'stock'];
+
+    protected $fillable = [
+        'product_name',
+        'description',
+        'product_price',
+        'stock',
+    ];
 }
 
 
