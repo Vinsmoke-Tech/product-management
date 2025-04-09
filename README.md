@@ -366,6 +366,7 @@ Route::prefix('products')->controller(ProductController::class)->group(function 
     Route::delete('{product}', 'destroy');
 });
 ```
+---
 
 # 📘 Dokumentasi Arsitektur
 
@@ -397,3 +398,80 @@ Route::prefix('products')->controller(ProductController::class)->group(function 
 
 -Dependency Inversion: Controller tergantung pada abstraksi, bukan implementasi.
 
+---
+
+# 📘 API Documentation
+
+## Base URL:
+```bash
+http://127.0.0.1:8000/api/products
+```
+
+## 🔹 GET /api/products
+```json
+{
+    "status": "success",
+    "message": "Daftar produk berhasil diambil.",
+    "data": [
+        {
+            "id": 1,
+            "product_name": "es teh",
+            "description": "tes",
+            "product_price": "10000.00",
+            "stock": 20,
+            "created_at": "2025-04-06T07:25:54.000000Z",
+            "updated_at": "2025-04-09T10:25:35.000000Z",
+            "deleted_at": null
+        },
+        {
+            "id": 2,
+            "product_name": "kopi",
+            "description": "tes",
+            "product_price": "10000.00",
+            "stock": 0,
+            "created_at": "2025-04-09T08:40:32.000000Z",
+            "updated_at": "2025-04-09T10:32:03.000000Z",
+            "deleted_at": null
+        },
+        {
+            "id": 3,
+            "product_name": "jeruk",
+            "description": "tes",
+            "product_price": "10000.00",
+            "stock": 20,
+            "created_at": "2025-04-09T09:17:22.000000Z",
+            "updated_at": "2025-04-09T09:17:22.000000Z",
+            "deleted_at": null
+        },
+        {
+            "id": 4,
+            "product_name": "buah",
+            "description": "tes",
+            "product_price": "10000.00",
+            "stock": 20,
+            "created_at": "2025-04-09T09:53:45.000000Z",
+            "updated_at": "2025-04-09T09:53:45.000000Z",
+            "deleted_at": null
+        },
+        {
+            "id": 5,
+            "product_name": "teh",
+            "description": "tes",
+            "product_price": "10000.00",
+            "stock": 2,
+            "created_at": "2025-04-09T10:20:33.000000Z",
+            "updated_at": "2025-04-09T10:20:33.000000Z",
+            "deleted_at": null
+        }
+    ],
+    "pagination": {
+        "total": 7,
+        "current_page": 1,
+        "per_page": 5,
+        "last_page": 2,
+        "next_page_url": "http://127.0.0.1:8000/api/products?page=2",
+        "previous_page_url": null
+    }
+}
+```
+ 
