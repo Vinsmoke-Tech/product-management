@@ -368,6 +368,9 @@ Route::prefix('products')->controller(ProductController::class)->group(function 
 ```
 
 #📘 Dokumentasi Arsitektur
+
+---
+
 ##✅ Arsitektur:
 Controller: Hanya menangani permintaan & respon.
 
@@ -380,6 +383,8 @@ Interface: Memastikan dependensi longgar & mudah diubah/diuji.
 Model: Mewakili entitas produk.
 
 Service Provider: Binding antar interface dan implementasi (IOC Container).
+
+---
 
 ##🔍 Prinsip SOLID:
 Single Responsibility: Tiap class punya satu tugas.
