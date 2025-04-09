@@ -474,24 +474,6 @@ http://127.0.0.1:8000/api/products
     }
 }
 ```
-
-## 🔹 POST /api/products
-```json
-{
-    "status": "success",
-    "message": "Produk berhasil ditambahkan.",
-    "data": {
-        "product_name": "ES KRIM",
-        "description": "tes",
-        "product_price": "10000",
-        "stock": "2",
-        "updated_at": "2025-04-09T13:39:38.000000Z",
-        "created_at": "2025-04-09T13:39:38.000000Z",
-        "id": 8
-    }
-}
-```
-
 ## 🔹 POST /api/products
 ```json
 {
@@ -510,11 +492,7 @@ http://127.0.0.1:8000/api/products
 ```
 
 ### Validasi:
-
-
-
-- Stock: tidak boleh negatif
-- Name: wajib, unik
+- Name: wajib, unik:
 ```json
 {
     "message": "Nama produk sudah digunakan, silakan pilih nama lain.",
@@ -526,14 +504,25 @@ http://127.0.0.1:8000/api/products
 }
 ```
 
-- Price: minimal 0
-  
-  ```json
+- Price: minimal 0:
+```json
 {
     "message": "Harga tidak boleh kurang dari 0.",
     "errors": {
         "product_price": [
             "Harga tidak boleh kurang dari 0."
+        ]
+    }
+}
+```
+
+- Stock: tidak boleh negatif:
+```json
+{
+    "message": "Stok tidak boleh kurang dari 0.",
+    "errors": {
+        "stock": [
+            "Stok tidak boleh kurang dari 0."
         ]
     }
 }
