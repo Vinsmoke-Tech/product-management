@@ -56,15 +56,7 @@ composer install
 ```bash
 rename .env.example jadi .env
 ```
-## Atur DB di .env
-```bash
-php artisan migrate
-```
-```bash
-php artisan serve
-```
-
-## 💻 .env
+## 🔧 Konfigurasi .env
 ```php
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -73,6 +65,13 @@ DB_DATABASE=product_crud
 DB_USERNAME={Username anda}
 DB_PASSWORD={Password anda}
 ```
+
+## 💻Jalankan Server
+```bash
+php artisan migrate
+php artisan serve
+```
+
 ## 📄 Model: Product.php
 ```php
 <?php
