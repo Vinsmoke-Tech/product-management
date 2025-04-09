@@ -14,26 +14,30 @@ Sebuah aplikasi Laravel sederhana untuk manajemen produk menggunakan prinsip Cle
 ---
 
 ## 📂 Struktur Folder
-
 app/
+├── Exceptions/
+│   └──  Handler.php
 ├── Http/
-│ ├── Exceptions/
-│ │ ├── Handler.php
-│ ├── Controllers/
-│ │ ├── ProductController.php
-│ ├── Requests/
-│ │ ├── ProductRequest.php
-│ ├── Interfaces/
-│ │ ├── ProductRepositoryInterface.php
-│ ├── Repositories/
-│ │ ├── ProductRepository.php
+│   ├── Controllers/
+│   │   └── ProductController.php
+│   ├── Requests/
+│   │   └── ProductRequest.php
+│   ├── Interfaces/
+│   │   └── ProductRepositoryInterface.php
+│   ├── Repositories/
+│   │   └── ProductRepository.php
 ├── Models/
-│ ├── Product.php
+│   └── Product.php
+├── Providers/
+│   └──  AppServiceProvider.php
+
 database/
-├── migrations/
-│ ├── 2025_04_06_060328_create_products_table.php
+└── migrations/
+    └── 2025_04_06_060328_create_products_table.php
+
 routes/
-├── api.php
+└── api.php
+
 
 ## 🚀 Instalasi
 ```bash
