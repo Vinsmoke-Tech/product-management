@@ -36,17 +36,18 @@ routes/
 ├── api.php
 
 ## 🚀 Instalasi
-
+```bash
 git clone https://github.com/Vinsmoke-Tech/product-management.git
 cd product-management
 code .
 composer install
 rename .env.example jadi .env
-
+```
 ## Atur DB di .env
 ```bash
 php artisan migrate
 php artisan serve
+```
 
 ## 💻 .env
 ```php
@@ -56,7 +57,7 @@ DB_PORT=3306
 DB_DATABASE=product_crud
 DB_USERNAME={Username anda}
 DB_PASSWORD={Password anda}
-
+```
 ## 📄 Model: Product.php
 ```php
 <?php
@@ -77,7 +78,7 @@ class Product extends Model
         'stock',
     ];
 }
-
+```
 
 
 
