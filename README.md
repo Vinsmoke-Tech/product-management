@@ -493,12 +493,6 @@ http://127.0.0.1:8000/api/products
 ```
 
 ## 🔹 POST /api/products
-
-### Validasi:
--name: wajib, unik
--price: minimal 0
--stock: tidak boleh negatif
-
 ```json
 {
     "status": "success",
@@ -511,6 +505,36 @@ http://127.0.0.1:8000/api/products
         "updated_at": "2025-04-09T13:39:38.000000Z",
         "created_at": "2025-04-09T13:39:38.000000Z",
         "id": 8
+    }
+}
+```
+
+### Validasi:
+
+
+
+- Stock: tidak boleh negatif
+- Name: wajib, unik
+```json
+{
+    "message": "Nama produk sudah digunakan, silakan pilih nama lain.",
+    "errors": {
+        "product_name": [
+            "Nama produk sudah digunakan, silakan pilih nama lain."
+        ]
+    }
+}
+```
+
+- Price: minimal 0
+  
+  ```json
+{
+    "message": "Harga tidak boleh kurang dari 0.",
+    "errors": {
+        "product_price": [
+            "Harga tidak boleh kurang dari 0."
+        ]
     }
 }
 ```
