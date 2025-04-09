@@ -14,6 +14,7 @@ Sebuah aplikasi Laravel sederhana untuk manajemen produk menggunakan prinsip Cle
 ---
 
 ## 📂 Struktur Folder
+```sql
 app/
 ├── Exceptions/
 │   └──  Handler.php
@@ -37,19 +38,29 @@ database/
 
 routes/
 └── api.php
-
+```
 
 ## 🚀 Instalasi
 ```bash
 git clone https://github.com/Vinsmoke-Tech/product-management.git
+```
+```bash
 cd product-management
+```
+```bash
 code .
+```
+```bash
 composer install
+```
+```bash
 rename .env.example jadi .env
 ```
 ## Atur DB di .env
 ```bash
 php artisan migrate
+```
+```bash
 php artisan serve
 ```
 
